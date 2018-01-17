@@ -25,9 +25,8 @@ Ghost container_ghost[4];
 int powerup_timer = 0;
 bool once = false;
   
-void setup() 
+void setup() //Runs once. 
 {
-  //Runs once.
   GD.begin();
   LOAD_ASSETS();
   Serial.begin(9600);
@@ -104,8 +103,6 @@ void loop()
     }
   }
 
-      
-
   //If ghost collides with pacman.
   for(int i = 0; i < 4; i++)
   {
@@ -114,12 +111,12 @@ void loop()
     container_ghost[i].ghost_render(frame);
     container_ghost[i].ghost_timer();
     
-    if(container_ghost[i].current_index == pacman.current_index and pacman.power_up == false)
+    if(container_ghost[i].current_index == pacman.current_index and pacman.power_up == false) //If pacman doesn't have a powerup, kill pacman.
     {
       pacman.health -= 1;
       break;
     }
-    else if(container_ghost[i].current_index == pacman.current_index and pacman.power_up == true and container_ghost[i].can_die == true)
+    else if(container_ghost[i].current_index == pacman.current_index and pacman.power_up == true and container_ghost[i].can_die == true) //If pacman has a powerup, kill ghost.
     {
       container_ghost[i].posX = 117;
       container_ghost[i].posY = 116;
@@ -179,7 +176,6 @@ void loop()
   {
       pacman.pac_render(frame);
       pacman.pac_move();
-
   }
   else
   {
