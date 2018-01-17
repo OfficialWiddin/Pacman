@@ -20,13 +20,14 @@ class Ghost {
     //1 = left, 2 = right, 3 = up, 4 = down
     int move_direction = 0;
 
-    //If pacman has powerup.
+    //Check if pacman has powerup.
     bool can_die = false;
 
     //Spawn position.
     int posX = 117;
     int posY = 116;
-
+    
+    //Index in the map.
     int previous_index_change = 0;
     int current_index = 0;
 
@@ -34,7 +35,8 @@ class Ghost {
     int original_index = 0;
     int img_index = 0;
     int changed_index = 0;
-
+    
+    //Timer for killable.
     int timer = 0;
     
     void ghost_img_index(int input)
@@ -43,7 +45,8 @@ class Ghost {
       changed_index = input;
       original_index = input;
     }
-
+    
+    //Render the Ghost.
     void ghost_render(float frame)
     {
       if(frame < 0.5)
@@ -62,7 +65,7 @@ class Ghost {
       }
     }
 
-
+    //Count.
     void ghost_timer()
     {
       if(can_die == true)
@@ -78,30 +81,30 @@ class Ghost {
       }
     }
     
+    //Ghost movement.
     void ghost_move()
     {
-      //Calculate the index.
+      //Calculate the index in the map.
       int xpos = (posX / 8);
       int ypos = (posY / 8);
       int index = (ypos*28+xpos);
       current_index = index;
-
-      //If we walk on the teleport.
-      if(my_level[index] == 5) //Teleport
+      
+      if(my_level[index] == 5) //If we walk on the teleport.
       {
-        if(index == 419) //Right to Left side.
+        if(index == 419) //Teleport from right to left side.
         {
           posX = 10;
           posY = 117;
         }
-        else if(index == 392) //Left to Right side.
+        else if(index == 392) //Teleport from left to right side.
         {
           posX = 215;
           posY = 117;
         }
       }
 
-      if(bot_level[index] == 6)
+      if(bot_level[index] == 6) //If walkable
       {
         if(previous_index_change != index)
         {
@@ -146,32 +149,27 @@ class Ghost {
           changed_index = 0;
           int RNG = random(0,paths);
 
-
-            if(directions[RNG] == 1)
-            {
-             move_up = true; 
-            }
-            else if(directions[RNG] == 2)
-            {
-              move_left = true;
-            }
-            else if(directions[RNG] == 3)
-            {
-              move_right = true;
-            }
-            else if(directions[RNG] == 4)
-            {
-              move_down = true;
-            }
-
-
-
-          
+          if(directions[RNG] == 1)
+          {
+            move_up = true; 
+          }
+          else if(directions[RNG] == 2)
+          {
+             move_left = true;
+          }
+          else if(directions[RNG] == 3)
+          {
+             move_right = true;
+          }
+          else if(directions[RNG] == 4)
+          {
+             move_down = true;
+          }          
         }   
           previous_index_change = index;
        }
 
-
+      
       if(move_left == true)
       {
         posX -= movement_speed;
