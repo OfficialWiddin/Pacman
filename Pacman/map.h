@@ -7,10 +7,10 @@
 //4 AI-Wall
 //5 Teleport
 
-// Varje ruta är 8x8
-// För X - position_x / 8
-// För Y - position_y / 8
-// För Index - row*28 + col
+//Each square is 8x8
+//For X = position_x / 8;
+//For Y = position_y / 8;
+//For map_index = row * 28 + col;
 
 char my_level[868] =
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // - 28
